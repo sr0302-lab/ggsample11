@@ -169,15 +169,24 @@ int GgApp::main(int argc, const char* const* argv)
 
     // 影の描画
     glDisable(GL_DEPTH_TEST);
+
+    // 投影後の裏表判定によって影の一部が消えないようにする
+    glDisable(GL_CULL_FACE);
+
     for (int i = 0; i < objects; ++i)
     {
       // アニメーションの変換行列
       const auto ma{ animate(t, i) };
 
-      // 影の描画 (楕円は XY 平面上にあるので X 軸中心に -π/2 回転)
-      //   【宿題】楕円の代わりに影を落とす図形そのものを描く (-π/2 回転は不要)
-      shader.loadModelviewMatrix(mv * ms * ma * ggRotateX(-1.570796f));
-      ellipse->draw();
+      // ウサギ本体を光源から床へ投影して影として描く
+      //
+      // mv：投影後の影を視点座標系へ変換
+      // ms：配置されたウサギを床面へ投影
+      // ma：ウサギを配置・アニメーション
+      shader.loadModelviewMatrix(mv * ms * ma);
+      
+      // 楕円ではなく、影を落とすウサギの図形そのものを描く
+      object->draw();
     }
     glEnable(GL_DEPTH_TEST);
 
