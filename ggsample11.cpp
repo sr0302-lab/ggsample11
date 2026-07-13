@@ -71,9 +71,6 @@ int GgApp::main(int argc, const char* const* argv)
   // 床の図形データの読み込み
   const GgSimpleObj floor{ "floor.obj" };
 
-  // 丸影用の楕円の作成
-  const auto ellipse{ ggEllipse(0.8f, 0.6f, 24) };
-
   // 影の材質バッファ
   const GgSimpleShader::MaterialBuffer materialBuffer{ shadowMaterial };
 
