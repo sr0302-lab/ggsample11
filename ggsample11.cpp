@@ -115,9 +115,9 @@ int GgApp::main(int argc, const char* const* argv)
   const GLfloat m[]
   {
       4.0f,   0.0f,   0.0f,   0.0f,
-      0.0f,   0.0f,   0.0f,   0.0f,
+      0.0f,   0.0f,   0.0f,   -1.0f,
       0.0f,   0.0f,   4.0f,   0.0f,
-      0.0f,   0.0f,   0.0f,   1.0f
+      0.0f,   0.0f,   0.0f,   4.0f
   };
   const GgMatrix ms{ m };
 
