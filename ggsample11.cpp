@@ -105,15 +105,18 @@ int GgApp::main(int argc, const char* const* argv)
   const GgSimpleShader::LightBuffer lightBuffer{ light };
 
   //
-  // 影付け処理用の変換行列 (丸影に使う楕円を床に張り付けるために y 座標値に 0 をかける)
-  //   【宿題】これを Projection Shadow 用の変換行列に置き換える
-  // 　　　　　※この変換行列はシャドウマッピングでは使いません
+  // Projection Shadow用の変換行列
+  // 
+  // 床面はy=0、光源位置は(0, 4, 0, 1)
+  // 物体の各頂点を光源から床面へ投影
+  //
+  // OpenGLの行列データは列優先で並べる
   //
   const GLfloat m[]
   {
-      1.0f,   0.0f,   0.0f,   0.0f,
+      4.0f,   0.0f,   0.0f,   0.0f,
       0.0f,   0.0f,   0.0f,   0.0f,
-      0.0f,   0.0f,   1.0f,   0.0f,
+      0.0f,   0.0f,   4.0f,   0.0f,
       0.0f,   0.0f,   0.0f,   1.0f
   };
   const GgMatrix ms{ m };
